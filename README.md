@@ -61,6 +61,7 @@ void loop() {
 
 https://wokwi.com/projects/457921932420225025
 
+<img width="946" height="796" alt="image" src="https://github.com/user-attachments/assets/c1d59f4b-882e-4517-afce-7de3e4c7fdd2" />
 
 ## Weekly Updates
 
