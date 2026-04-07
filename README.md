@@ -1,145 +1,149 @@
 Walgama Kankanamge Praveen Kavishka
+
 4230z
 
+Smart Clothes Drying System Using Arduino
+Project Title
 
-# Motion Sensor Light Using Arduino
+IoT Smart Clothes Drying System with Rain Detection
 
-## Project Title
+Description
 
-Smart Motion Sensor Light for Home Automation
+This project demonstrates a smart home automation system using an Arduino microcontroller and environmental sensors. The system automatically protects clothes from rain by detecting weather conditions and controlling a protective cover.
 
-## Description
+The purpose of this project is to create a practical automation system that helps with daily household tasks such as drying clothes safely outdoors without worrying about sudden rain.
 
-This project demonstrates a simple home automation system using an Arduino microcontroller and a PIR motion sensor. The system automatically turns on a light when motion is detected and turns it off when no motion is present.
+The system uses sensors to detect rain, humidity, and sunlight conditions. When rain is detected, the system automatically closes a cover to protect the clothes. When the weather becomes sunny again, the cover opens so the clothes can continue drying.
 
-The purpose of this project is to create a basic robotic system that helps with daily household tasks, such as automatically controlling lights to improve convenience and save electricity.
+This system can be used in homes, apartments, balconies, and smart-city residential buildings where outdoor clothes drying is common.
 
-This system can be used in places like hallways, bathrooms, garages, and staircases where lights are only needed when someone is present.
-
-## Components
-
-* Arduino Uno
-* PIR Motion Sensor (HC-SR501)
-* LED
-* 220Ω Resistor
-* Breadboard
-* Jumper wires
-* USB cable
-
-## Circuit Diagram
+Components
+Arduino Uno
+Rain Sensor Module
+DHT11 Humidity Sensor
+LDR Light Sensor
+Servo Motor (Automatic Cover Control)
+ESP8266 WiFi Module
+Breadboard
+Jumper wires
+Power supply / USB cable
+Circuit Diagram
 
 Connections used in the project:
 
-PIR Sensor:
+Rain Sensor:
 
-* VCC → Arduino 5V
-* GND → Arduino GND
-* OUT → Arduino Pin 2
+VCC → Arduino 5V
+GND → Arduino GND
+OUT → Arduino Pin 2
 
-LED:
+DHT11 Humidity Sensor:
 
-* Long leg (Anode) → Arduino Pin 13
-* Short leg (Cathode) → Resistor → GND
+VCC → Arduino 5V
+GND → Arduino GND
+DATA → Arduino Pin 4
 
-## Code
+LDR Light Sensor:
 
-```cpp
-int pirPin = 2;
-int ledPin = 13;
+One pin → Arduino A0
+Other pin → GND
+
+Servo Motor:
+
+VCC → Arduino 5V
+GND → Arduino GND
+Signal → Arduino Pin 9
+
+ESP8266 WiFi Module:
+
+VCC → 3.3V
+GND → GND
+TX → Arduino RX
+RX → Arduino TX
+Code
+#include <Servo.h>
+
+int rainPin = 2;
+int lightSensor = A0;
+Servo cover;
 
 void setup() {
-  pinMode(pirPin, INPUT);
-  pinMode(ledPin, OUTPUT);
+  pinMode(rainPin, INPUT);
+  cover.attach(9);
 }
 
 void loop() {
-  int motion = digitalRead(pirPin);
 
-  if (motion == HIGH) {
-    digitalWrite(ledPin, HIGH);
-  } else {
-    digitalWrite(ledPin, LOW);
+  int rain = digitalRead(rainPin);
+  int lightValue = analogRead(lightSensor);
+
+  if (rain == LOW) {
+    cover.write(0);   // close cover
   }
+  else if (lightValue > 600) {
+    cover.write(90);  // open cover
+  }
+
+  delay(500);
 }
-```
+Weekly Updates
+Week 1 – INTRO (06/03/2026)
+Selected Project Topic
 
-https://wokwi.com/projects/457921932420225025
+The selected project is Smart Clothes Drying System using Arduino. This project focuses on creating a smart system that automatically protects clothes from rain.
 
-<img width="946" height="796" alt="image" src="https://github.com/user-attachments/assets/c1d59f4b-882e-4517-afce-7de3e4c7fdd2" />
+Project Idea
 
-<img width="952" height="815" alt="image" src="https://github.com/user-attachments/assets/debf2aa6-6fdb-4f9e-b98c-ab570090f232" />
+The idea of the project is to use rain, humidity, and sunlight sensors with an Arduino Uno to monitor weather conditions. When rain is detected, the system will automatically close a protective cover over the clothes. When the weather becomes sunny again, the cover will open automatically.
 
+This system helps improve convenience and prevents clothes from getting wet due to unexpected rain.
 
-## Weekly Updates
+Project Objectives
+To learn the basics of Arduino and sensors
+To build a smart home automation system
+To detect rain using a rain sensor
+To automatically protect clothes using a motorized cover
+Components Required
+Arduino Uno
+Rain Sensor Module
+DHT11 Humidity Sensor
+LDR Light Sensor
+Servo Motor
+ESP8266 WiFi Module
+Breadboard
+Jumper wires
+USB cable
+Week 2 – BASICS (20/03/2026)
+Building the Basic Circuit
 
-## Week 1 – INTRO (06/03/2026)
+The basic circuit was created by connecting the rain sensor, light sensor, and servo motor to the Arduino Uno using a breadboard. The rain sensor detects rain and sends a signal to the Arduino controller.
 
-### Selected Project Topic
+Implementing the Arduino Code
 
-The selected project is **Motion Sensor Light using Arduino**. This project focuses on creating a simple home automation system that can automatically turn on a light when motion is detected.
+The Arduino program was written to read the sensor values. When rain is detected, the Arduino sends a signal to the servo motor to close the protective cover.
 
-### Project Idea
+Testing Using Simulation
 
-The idea of the project is to use a **PIR motion sensor** with an **Arduino Uno** to detect human movement. When motion is detected, the Arduino will turn on a light (LED). When there is no motion, the light will turn off automatically. This helps improve convenience and can also save electricity in homes.
+The circuit and code were tested using an Arduino simulation platform. The simulation showed that the cover closes when rain is detected and opens again when weather conditions are suitable for drying.
 
-### Project Objectives
+Week 3 – ADVANCED (03/04/2026)
+Adding IoT Functionality
 
-* To learn the basics of Arduino and sensors
-* To build a simple home automation system
-* To detect motion using a PIR sensor
-* To automatically control a light based on motion detection
+In the advanced stage, the system will be improved by adding the ESP8266 WiFi module. This allows the system to connect to the internet and send notifications to the user when rain is detected.
 
-### Components Required
+Improving Sensor Monitoring
 
-* Arduino Uno
-* PIR Motion Sensor (HC-SR501)
-* LED
-* 220Ω Resistor
-* Breadboard
-* Jumper wires
-* USB cable
+Additional sensors such as humidity and sunlight sensors will be used to improve the system’s decision making so that clothes dry more efficiently.
 
----
+Week 4 – MORE (17/04/2026)
+Final Testing
 
-## Week 2 – BASICS (20/03/2026)
+The complete system will be tested to ensure all sensors, motors, and controllers work properly together.
 
-### Building the Basic Circuit
+Documentation and Demonstration
 
-The basic circuit was created by connecting the PIR motion sensor and LED to the Arduino Uno using a breadboard. The PIR sensor detects motion and sends a signal to the Arduino.
+All project steps, circuit diagrams, code, and system operation will be documented clearly for project demonstration.
 
-### Implementing the Arduino Code
+Uploading Final Results
 
-The Arduino program was written to read the signal from the PIR sensor. If motion is detected, the Arduino sends a signal to turn the LED on. If no motion is detected, the LED remains off.
-
-### Testing Using Wokwi
-
-The circuit and code were tested using the **Wokwi Arduino simulator**. The simulation showed that the LED turns on when motion is detected and turns off when no motion is present.
-
----
-
-## Week 3 – ADVANCED (03/04/2026)
-
-### Adding a Relay Module
-
-In the advanced stage, the system will be improved by adding a **relay module**. This will allow the Arduino to control a real household light bulb instead of just an LED.
-
-### Optimizing Sensor Settings
-
-The PIR sensor settings such as **sensitivity and delay time** will be adjusted to improve the accuracy of motion detection and ensure the light stays on for an appropriate amount of time.
-
----
-
-## Week 4 – MORE (17/04/2026)
-
-### Final Testing
-
-The complete system will be tested to ensure all components work properly together and the motion detection system functions correctly.
-
-### Documentation and Demonstration
-
-All project steps, circuit diagrams, and code will be documented and explained clearly for demonstration purposes.
-
-### Uploading Final Results
-
-Images of the circuit, simulation results, and final project implementation will be uploaded to the **GitHub repository** to complete the project documentation.
-
+Images of the circuit, prototype system, and demonstration results will be uploaded to the GitHub repository to complete the project documentation.
